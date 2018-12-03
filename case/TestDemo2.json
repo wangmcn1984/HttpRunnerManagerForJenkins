@@ -1,0 +1,62 @@
+[
+    {
+        "config": {
+            "name": "testset description",
+            "variables": [],
+            "request": {
+                "base_url": "",
+                "headers": {
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36",
+                    "Cookie": "${get_cookie()}"
+                }
+            }
+        }
+    },
+    {
+        "test": {
+            "name": "TestDemo2",
+            "request": {
+                "url": "http://10.53.27.229:8000/api/run_batch_test/",
+                "method": "POST",
+                "headers": {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "Content-Type": "application/json"
+                },
+                "json": {
+                    "id": {
+                        "suite_7": "7"
+                    },
+                    "env_name": "http://127.0.0.1:8083",
+                    "type": "suite",
+                    "report_name": "TestDemo2测试结果"
+                }
+            },
+            "validate": [
+                {
+                    "eq": [
+                        "status_code",
+                        200
+                    ]
+                },
+                {
+                    "eq": [
+                        "headers.Content-Type",
+                        "text/html; charset=utf-8"
+                    ]
+                },
+                {
+                    "contains": [
+                        "content",
+                        "用例执行中"
+                    ]
+                }
+            ],
+            "setup_hooks": [
+                "${hook_sleep()}"
+            ],
+            "teardown_hooks": [
+                "${hook_sleep()}"
+            ]
+        }
+    }
+]
