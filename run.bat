@@ -1,0 +1,1 @@
+start cmd /c "cd %cd%&&hrun case/"
